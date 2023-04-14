@@ -39,4 +39,8 @@ testem.log
 Thumbs.db
 
 .angular
+<<<<<<< HEAD
 node_modules
+=======
+package-lock.json
+>>>>>>> 1c93d38 (init commit)
