@@ -30,6 +30,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { QuillConfigModule } from 'ngx-quill/config';
 import { PaginatorModule } from 'primeng/paginator';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { TagModule } from 'primeng/tag';
+import { InputMaskModule } from 'primeng/inputmask';
 const UX_MODULE = [
   BrowserAnimationsModule,
   CardModule,
@@ -46,7 +50,9 @@ const UX_MODULE = [
   DropdownModule,
   EditorModule,
   QuillConfigModule,
-  PaginatorModule
+  PaginatorModule,
+  TagModule,
+  InputMaskModule
 ];
 
 @NgModule({
@@ -59,7 +65,9 @@ const UX_MODULE = [
     CategoriesListComponent,
     CategoriesFormComponent,
     ProductsListComponent,
-    ProductsFormComponent
+    ProductsFormComponent,
+    UsersListComponent,
+    UsersFormComponent
   ],
   imports: [
     BrowserModule,
