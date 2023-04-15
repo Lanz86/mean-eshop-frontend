@@ -21,7 +21,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
-
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
+import { EditorModule } from 'primeng/editor';
+import { QuillConfigModule } from 'ngx-quill/config';
+import { PaginatorModule } from 'primeng/paginator';
 const UX_MODULE = [
   BrowserAnimationsModule,
   CardModule,
@@ -31,7 +39,14 @@ const UX_MODULE = [
   InputTextModule,
   ToastModule,
   ConfirmDialogModule,
-  ColorPickerModule
+  ColorPickerModule,
+  InputNumberModule,
+  InputTextareaModule,
+  InputSwitchModule,
+  DropdownModule,
+  EditorModule,
+  QuillConfigModule,
+  PaginatorModule
 ];
 
 @NgModule({
@@ -42,7 +57,9 @@ const UX_MODULE = [
     ShellComponent,
     SidebarComponent,
     CategoriesListComponent,
-    CategoriesFormComponent
+    CategoriesFormComponent,
+    ProductsListComponent,
+    ProductsFormComponent
   ],
   imports: [
     BrowserModule,
