@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@lnzsoftware/products';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-categories-form',
   templateUrl: './categories-form.component.html',
   styles: []
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
   form: FormGroup = this.formBuilder.group({});
   isSubmited = false;
   editmode = false;
   currentCategoryId: string;
+  endsubs$: Subject<any> = new Subject();
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
@@ -23,6 +26,10 @@ export class CategoriesFormComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute
   ) {}
+  ngOnDestroy(): void {
+    this.endsubs$.next;
+    this.endsubs$.complete();
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -59,51 +66,57 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe({
-      next: (category: Category) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Category ${category.name} is updated`
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.goBack();
+    this.categoriesService
+      .updateCategory(category)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe({
+        next: (category: Category) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `Category ${category.name} is updated`
           });
-      },
-      error: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Category is not updated'
-        });
-      }
-    });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.goBack();
+            });
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Category is not updated'
+          });
+        }
+      });
   }
 
   private _createCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe({
-      next: (category: Category) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Category ${category.name} is created`
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.location.back();
+    this.categoriesService
+      .createCategory(category)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe({
+        next: (category: Category) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `Category ${category.name} is created`
           });
-      },
-      error: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Category is not created'
-        });
-      }
-    });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Category is not created'
+          });
+        }
+      });
   }
 
   get categoryForm() {
@@ -115,14 +128,17 @@ export class CategoriesFormComponent implements OnInit {
       if (params.id) {
         this.editmode = true;
         this.currentCategoryId = params.id;
-        this.categoriesService.getCategory(params.id).subscribe({
-          next: (category) => {
-            this.categoryForm.name.setValue(category.name);
-            this.categoryForm.icon.setValue(category.icon);
-            this.categoryForm.color.setValue(category.color);
-          },
-          error: () => {}
-        });
+        this.categoriesService
+          .getCategory(params.id)
+          .pipe(takeUntil(this.endsubs$))
+          .subscribe({
+            next: (category) => {
+              this.categoryForm.name.setValue(category.name);
+              this.categoryForm.icon.setValue(category.icon);
+              this.categoryForm.color.setValue(category.color);
+            },
+            error: () => {}
+          });
       }
     });
   }
