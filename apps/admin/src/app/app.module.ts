@@ -34,6 +34,9 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.component';
+import { FieldsetModule } from 'primeng/fieldset';
 const UX_MODULE = [
   BrowserAnimationsModule,
   CardModule,
@@ -52,7 +55,8 @@ const UX_MODULE = [
   QuillConfigModule,
   PaginatorModule,
   TagModule,
-  InputMaskModule
+  InputMaskModule,
+  FieldsetModule
 ];
 
 @NgModule({
@@ -67,7 +71,9 @@ const UX_MODULE = [
     ProductsListComponent,
     ProductsFormComponent,
     UsersListComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    OrdersListComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
