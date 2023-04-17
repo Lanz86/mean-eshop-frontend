@@ -12,7 +12,7 @@ import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
@@ -37,6 +37,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.component';
 import { FieldsetModule } from 'primeng/fieldset';
+import { JwtInterceptor, UsersModule } from '@lnzsoftware/users';
 const UX_MODULE = [
   BrowserAnimationsModule,
   CardModule,
@@ -80,9 +81,14 @@ const UX_MODULE = [
     ...UX_MODULE,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' })
+    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    UsersModule
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [
+    MessageService,
+    ConfirmationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
