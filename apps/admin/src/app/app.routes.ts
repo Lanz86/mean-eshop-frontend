@@ -9,11 +9,13 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.component';
+import { AuthGuard } from '@lnzsoftware/users';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
