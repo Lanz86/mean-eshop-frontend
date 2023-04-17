@@ -15,6 +15,7 @@
     "@angular/platform-browser-dynamic": "~15.2.0",
     "@angular/router": "~15.2.0",
     "@nrwl/angular": "15.9.2",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.2.3",
     "i18n-iso-countries": "^7.6.0",
     "ngx-quill": "^21.0.0",

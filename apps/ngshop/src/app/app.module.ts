@@ -9,13 +9,31 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { UiModule } from '@lnzsoftware/ui';
 import { AccordionModule } from 'primeng/accordion';
-
+import { NavComponent } from './shared/nav/nav.component';
+import { ProductsModule } from '@lnzsoftware/products';
+import { UiModule } from '@lnzsoftware/ui';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, HomePageComponent, ProductListComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }), UiModule, AccordionModule, BrowserAnimationsModule],
+  declarations: [
+    AppComponent,
+    NxWelcomeComponent,
+    HomePageComponent,
+    ProductListComponent,
+    HeaderComponent,
+    FooterComponent,
+    NavComponent
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    AccordionModule,
+    BrowserAnimationsModule,
+    ProductsModule,
+    UiModule,
+    HttpClientModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

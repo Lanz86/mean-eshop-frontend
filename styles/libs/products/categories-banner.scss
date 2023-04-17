@@ -1,0 +1,29 @@
+.categories-banner {
+  margin-top: 75px;
+
+  h3 {
+    color: var(--surface-700);
+    margin-bottom: 20px;
+  }
+
+  .category {
+    cursor: pointer;
+    min-height: 100px;
+    border-radius: 14px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--surface-0);
+    &-icon {
+      .pi {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+    }
+    &-name {
+      font-size: 1em;
+    }
+  }
+}
