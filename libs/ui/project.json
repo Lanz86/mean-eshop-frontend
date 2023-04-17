@@ -2,15 +2,10 @@
   "name": "ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/src",
+  "prefix": "lnzsoftware",
+  "tags": [],
   "projectType": "library",
   "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/ui/**/*.ts"]
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -24,7 +19,13 @@
           "codeCoverage": true
         }
       }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui/**/*.ts", "libs/ui/**/*.html"]
+      }
     }
-  },
-  "tags": []
+  }
 }

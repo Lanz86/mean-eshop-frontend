@@ -15,11 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": ["enviroments/*"],
       "@lnzsoftware/orders": ["libs/orders/src/index.ts"],
       "@lnzsoftware/products": ["libs/products/src/index.ts"],
       "@lnzsoftware/ui": ["libs/ui/src/index.ts"],
-      "@lnzsoftware/users": ["libs/users/src/index.ts"],
-      "@env/*": ["enviroments/*"]
+      "@lnzsoftware/users": ["libs/users/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

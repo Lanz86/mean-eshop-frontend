@@ -1,5 +1,8 @@
-//base
+@import 'normalize.css/normalize.css';
+
+//base\
 @import './base/colors.scss';
+
 @import './base/mixins.scss';
 @import './base/fonts.scss';
 
@@ -8,8 +11,10 @@
 @import 'primeng/resources/primeng.css';
 @import 'primeicons/primeicons.css';
 @import 'primeflex/primeflex.css';
+@import 'animate.css/animate.css';
 
 @import './base/configuration.scss';
+
 //pages
 @import './apps/shop/pages/home-page.scss';
 @import './apps/shop/pages/product-list-page.scss';
@@ -17,7 +22,15 @@
 //shared
 @import './apps/shop/shared/header.scss';
 @import './apps/shop/shared/footer.scss';
+@import './apps/shop/shared/nav.scss';
 
 //Libs
 @import './libs/ui/ui.scss';
 @import './libs/products/products.scss';
+
+.container {
+  width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: var(--surface-100);
+}

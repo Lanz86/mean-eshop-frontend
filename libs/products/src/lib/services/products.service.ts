@@ -37,4 +37,8 @@ export class ProductsService {
       })
     );
   }
+
+  getFeatureProducts(count: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/get/featured/${count}`);
+  }
 }
