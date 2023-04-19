@@ -13,6 +13,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@lnzsoftware/products';
 import { UiModule } from '@lnzsoftware/ui';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersModule } from '@lnzsoftware/orders';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ProductsModule,
     UiModule,
-    HttpClientModule
+    HttpClientModule,
+    OrdersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,4 +44,8 @@ export class OrdersService {
       })
     );
   }
+
+  getProduct(productId: string): Observable<any> {
+    return this.http.get<any>(`${enviroment.apiUrl}products/${productId}`);
+  }
 }

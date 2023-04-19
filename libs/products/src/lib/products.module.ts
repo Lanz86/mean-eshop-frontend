@@ -13,6 +13,9 @@ import { RatingModule } from 'primeng/rating';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UiModule } from '@lnzsoftware/ui';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 const routes: Routes = [
   {
     path: 'products',
@@ -37,7 +40,8 @@ const routes: Routes = [
     FormsModule,
     RatingModule,
     InputNumberModule,
-    UiModule
+    UiModule,
+    ToastModule
   ],
   declarations: [
     ProductsSearchComponent,
@@ -52,6 +56,7 @@ const routes: Routes = [
     CategoriesBannerComponent,
     ProductItemComponent,
     FeaturedProductsComponent
-  ]
+  ],
+  providers: [MessageService]
 })
 export class ProductsModule {}

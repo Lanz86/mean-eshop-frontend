@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from '../../models/product';
+import { CartService } from '@lnzsoftware/orders';
 @Component({
   selector: 'products-product-page',
   templateUrl: './product-detail.component.html',
@@ -12,8 +13,12 @@ import { Product } from '../../models/product';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   product: Product | null = null;
   endsubs$: Subject<any> = new Subject();
-  quantity: number;
-  constructor(private productService: ProductsService, private route: ActivatedRoute) {}
+  quantity = 1;
+  constructor(
+    private productService: ProductsService,
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
   ngOnDestroy(): void {
     this.endsubs$.next;
     this.endsubs$.complete();
@@ -39,5 +44,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  addProductToCart() {}
+  addProductToCart() {
+    this.cartService.setCartItem({ productId: this.product?.id, quantity: this.quantity });
+  }
 }

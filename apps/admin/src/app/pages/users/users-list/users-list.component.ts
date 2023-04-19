@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { User, UsersService } from '@lnzsoftware/products';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import * as countriesLib from 'i18n-iso-countries';
 declare const require;
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { User, UsersService } from '@lnzsoftware/users';
 @Component({
   selector: 'admin-users-list',
   templateUrl: './users-list.component.html'

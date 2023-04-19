@@ -4,12 +4,12 @@ import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { User, UsersService } from '@lnzsoftware/products';
 import * as countriesLib from 'i18n-iso-countries';
 declare const require;
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { User, UsersService } from '@lnzsoftware/users';
 
 @Component({
   selector: 'admin-users-form',

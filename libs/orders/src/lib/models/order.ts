@@ -1,9 +1,9 @@
-import { User } from '@lnzsoftware/products';
+import { User } from '@lnzsoftware/users';
 import { OrderItem } from './order-item';
 
 export interface Order {
-  id: string;
-  orderItems?: OrderItem;
+  id?: string;
+  orderItems?: OrderItem[];
   shippingAddress1?: string;
   shippingAddress2?: string;
   city?: string;
@@ -12,6 +12,6 @@ export interface Order {
   phone?: string;
   status?: string;
   totalPrice?: number;
-  user?: User;
+  user?: any;
   dateOrdered?: string;
 }

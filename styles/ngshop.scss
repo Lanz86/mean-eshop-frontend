@@ -27,10 +27,16 @@
 //Libs
 @import './libs/ui/ui.scss';
 @import './libs/products/products.scss';
+@import './libs/orders/orders.scss';
 
 .container {
   width: 1200px;
   padding: 15px;
   margin: 0 auto;
   background-color: var(--surface-100);
+}
+
+.p-button {
+  background-color: $primary-color;
+  border: 0;
 }

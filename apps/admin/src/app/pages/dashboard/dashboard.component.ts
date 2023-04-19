@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrdersService } from '@lnzsoftware/orders';
-import { ProductsService, UsersService } from '@lnzsoftware/products';
+import { ProductsService } from '@lnzsoftware/products';
+import { UsersService } from '@lnzsoftware/users';
+
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
