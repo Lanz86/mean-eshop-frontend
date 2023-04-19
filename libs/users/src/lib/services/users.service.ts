@@ -6,14 +6,16 @@ import { enviroment } from '@env/enviroments';
 import { User } from '../models/user';
 
 import * as countriesLib from 'i18n-iso-countries';
+import { UsersFacade } from '../state/users.facade';
 declare const require;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userFacade: UsersFacade) {}
   apiUrl = `${enviroment.apiUrl}users`;
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}`);
   }
@@ -48,5 +50,17 @@ export class UsersService {
       return { id: country[0], name: country[1] };
     });
     return countries;
+  }
+
+  initAppSession() {
+    this.userFacade.buildUserSession();
+  }
+
+  observeCurrentUser() {
+    return this.userFacade.currentUser$;
+  }
+
+  isCurrentUserAuth() {
+    return this.userFacade.isAuth$;
   }
 }

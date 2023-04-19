@@ -12,7 +12,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UsersModule } from '@lnzsoftware/users';
+import { AuthGuard, UsersModule } from '@lnzsoftware/users';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { TankYouComponent } from './components/tank-you/tank-you.component';
 const route: Routes = [
@@ -21,6 +21,7 @@ const route: Routes = [
     component: CartPageComponent
   },
   {
+    canActivate: [AuthGuard],
     path: 'checkout',
     component: CheckoutPageComponent
   },

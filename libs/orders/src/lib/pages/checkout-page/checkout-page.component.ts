@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrderItem } from '../../models/order-item';
@@ -8,12 +8,13 @@ import { CartService } from '../../services/cart.service';
 import { Cart } from '../../models/cart';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
+import { Subject, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html'
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private usersService: UsersService,
@@ -21,15 +22,23 @@ export class CheckoutPageComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrdersService
   ) {}
+
+  endsub$: Subject<any> = new Subject();
   checkoutFormGroup: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
   userId = '643fc836e69e7a23882dd845';
   countries = [];
 
+  ngOnDestroy(): void {
+    this.endsub$.next;
+    this.endsub$.complete();
+  }
+
   ngOnInit(): void {
     this._initCheckoutForm();
     this._getCartItems();
+    this._autoFillForm();
     this._getCountries();
   }
 
@@ -97,5 +106,27 @@ export class CheckoutPageComponent implements OnInit {
       };
     });
     console.log(this.orderItems);
+  }
+
+  private _autoFillForm() {
+    this.usersService
+      .observeCurrentUser()
+      .pipe(takeUntil(this.endsub$))
+      .subscribe({
+        next: (user) => {
+          console.log(user);
+          if (user) {
+            this.userId = user.id;
+            this.checkoutForm.name.setValue(user.name);
+            this.checkoutForm.email.setValue(user.email);
+            this.checkoutForm.street.setValue(user.street);
+            this.checkoutForm.apartment.setValue(user.apartment);
+            this.checkoutForm.city.setValue(user.city);
+            this.checkoutForm.zip.setValue(user.zip);
+            this.checkoutForm.country.setValue(user.country);
+            this.checkoutForm.phone.setValue(user.phone);
+          }
+        }
+      });
   }
 }
