@@ -4,6 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { enviroment } from '@env/enviroments';
 import { User } from '../models/user';
+
+import * as countriesLib from 'i18n-iso-countries';
+declare const require;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +23,7 @@ export class UsersService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}`, user);
+    return this.http.post<User>(`${this.apiUrl}/register`, user);
   }
 
   updateUser(user: User): Observable<User> {
@@ -36,5 +40,13 @@ export class UsersService {
         return value.userCount;
       })
     );
+  }
+
+  getCountries() {
+    countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'));
+    const countries = Object.entries(countriesLib.getNames('en')).map((country) => {
+      return { id: country[0], name: country[1] };
+    });
+    return countries;
   }
 }
