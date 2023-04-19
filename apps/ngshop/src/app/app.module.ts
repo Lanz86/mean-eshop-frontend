@@ -12,8 +12,11 @@ import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@lnzsoftware/products';
 import { UiModule } from '@lnzsoftware/ui';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OrdersModule } from '@lnzsoftware/orders';
+import { JwtInterceptor, UsersModule } from '@lnzsoftware/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +34,12 @@ import { OrdersModule } from '@lnzsoftware/orders';
     ProductsModule,
     UiModule,
     HttpClientModule,
-    OrdersModule
+    OrdersModule,
+    UsersModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot({})
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

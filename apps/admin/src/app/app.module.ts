@@ -38,6 +38,8 @@ import { OrdersListComponent } from './pages/orders/orders-list/orders-list.comp
 import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { JwtInterceptor, UsersModule } from '@lnzsoftware/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 const UX_MODULE = [
   BrowserAnimationsModule,
   CardModule,
@@ -82,7 +84,9 @@ const UX_MODULE = [
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-    UsersModule
+    UsersModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot({})
   ],
   providers: [
     MessageService,
